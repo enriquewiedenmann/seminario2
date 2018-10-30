@@ -54,7 +54,7 @@ public class login extends HttpServlet {
 		String pass = HashUtil.hashString(request.getParameter("pass"));
 
 		UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
-		if (us.getPassword().equals(pass)) {
+		if ((us!=null)&&(us.getPassword().equals(pass))) {
 			out.print("{\"Error\":\"false\"}");
 		} else {
 			out.print("{\"Error\":\"true\"}");
