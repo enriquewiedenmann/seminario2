@@ -16,12 +16,19 @@ public class UsuarioDTO implements Serializable {
 	private String apodo;
 	private String email;
 	private String password;
-	
+
 	private String loggedSession;
 
 	public UsuarioDTO() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	public UsuarioDTO(String apodo, String email, String password) {
+		super();
+		this.apodo = apodo;
+		this.email = email;
+		this.password = password;
+
 	}
 
 	public String getApodo() {
@@ -58,12 +65,8 @@ public class UsuarioDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UsuarioDTO [apodo=" + apodo + ", email=" + email
-				+ ", password=" + password + ", loggedSession=" + loggedSession
-				+ "]";
+		return "UsuarioDTO [apodo=" + apodo + ", email=" + email + ", password=" + password + ", loggedSession="
+				+ loggedSession + "]";
 	}
-	
-	
-	
-	
+
 }

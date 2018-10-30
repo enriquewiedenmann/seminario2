@@ -23,60 +23,10 @@ public class AdministradorUsuario {
 		return instancia;
 	}
 
-	public void crearUsuario(UsuarioDTO usuario) {
-		if (!UsuarioDAO.getInstancia().existeJugadorByEmail(usuario.getEmail())) {
-			Usuario j = new Usuario(usuario.getApodo(), usuario.getEmail(), usuario.getPassword());
-			j.grabar();
 
-		}
-	}
-
-	public void login(UsuarioDTO usuario) {
-		Usuario j = this.buscarUsuario(usuario.getEmail());
-		if (j != null) {
-			if (j.passwordCorrecta(usuario.getPassword())) {
-				j.grabar();
-
-			}
-		}
-
-	}
-
-	public void logout(UsuarioDTO usuario) {
-		if (this.isLoggedIn(usuario)) {
-			Usuario j = this.buscarUsuario(usuario.getEmail());
-			usuarios.remove(j);
-			j.grabar();
-
-		}
-	}
-
-	public boolean isLoggedIn(UsuarioDTO usuario) {
-		Usuario j = this.buscarUsuario(usuario.getEmail());
-		if (j != null) {
-			return true;
-		}
-		return false;
-
-	}
-
-	public Usuario buscarUsuario(String email) {
-		for (Usuario j : usuarios) {
-			if (j.getEmail().equals(email)) {
-				j.actualizar();
-				return j;
-			}
-		}
-		Usuario j = UsuarioDAO.getInstancia().toNegocio(UsuarioDAO.getInstancia().getJugadorByEmail(email));
-		this.usuarios.add(j);
-		return j;
-	}
-
-	public UsuarioDTO buscarUsuarioDTO(String apodo) {
-
-		Usuario u = this.buscarUsuario(apodo);
-
-		return u.toDTO();
+	public UsuarioDTO login(String email) {
+		UsuarioDTO u = UsuarioDAO.getInstancia().buscarUsuarioByApodo(email);
+		return u;
 	}
 
 }

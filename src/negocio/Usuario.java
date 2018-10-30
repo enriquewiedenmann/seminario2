@@ -1,26 +1,19 @@
 package negocio;
 
 
-import view.UsuarioDTO;
-
-import dao.UsuarioDAO;
-
+import utils.HashUtil;
 
 public class Usuario {
-	
+
 	private String apodo;
 	private String email;
 	private String password;
-	
-	
-
-	
 
 	public Usuario(String apodo, String email, String password) {
 		this.apodo = apodo;
 		this.email = email;
 		this.password = password;
-	
+
 	}
 
 	public String getApodo() {
@@ -47,31 +40,10 @@ public class Usuario {
 		this.password = password;
 	}
 
-	
-	
-
-
 	public boolean passwordCorrecta(String password) {
-		return (this.password.equals(password));
-	}
-	
-		
-	
-	public UsuarioDTO toDTO() {
-		UsuarioDTO ud = new UsuarioDTO();
-		ud.setApodo(this.getApodo());
-		ud.setEmail(this.getEmail());
-		ud.setPassword(this.getPassword());
-		return ud;
-	}
-			
-	public void grabar() {
-		UsuarioDAO.getInstancia().grabar(this);
-	}
-	
-	public void actualizar() {
-		UsuarioDAO.getInstancia().actualizar(this);
+		return (this.password.equals(HashUtil.hashString(password)));
 	}
 
-	
-	}
+
+
+}

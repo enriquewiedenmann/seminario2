@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.AdministradorUsuario;
+import utils.HashUtil;
 import view.UsuarioDTO;
 
 /**
@@ -44,10 +45,20 @@ public class login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
-		// Get the printwriter object from response to write the required json object to the output stream      
+		// Get the printwriter object from response to write the required json object to
+		// the output stream
 		PrintWriter out = response.getWriter();
-		// Assuming your json object is **jsonObject**, perform the following, it will return your json object  
-		out.print("{}");
+		// Assuming your json object is **jsonObject**, perform the following, it will
+		// return your json object
+		String email = request.getParameter("email");
+		String pass = HashUtil.hashString(request.getParameter("pass"));
+
+		UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
+		if (us.getPassword().equals(pass)) {
+			out.print("{\"Error\":\"false\"}");
+		} else {
+			out.print("{\"Error\":\"true\"}");
+		}
 		out.flush();
 	}
 
