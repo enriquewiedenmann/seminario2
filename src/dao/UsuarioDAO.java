@@ -37,18 +37,18 @@ public class UsuarioDAO {
 	}
 
 	public Usuario toNegocio(UsuarioEntity je) {
-		Usuario j = new Usuario(je.getApodo(), je.getEmail(), je.getPassword(), je.getLoggedSession());
+		Usuario j = new Usuario(je.getApodo(), je.getEmail(), je.getPassword());
 		
 		return j;
 	}
 		
 	public Usuario toNegocio_grupo(UsuarioEntity je) {
-		Usuario j = new Usuario(je.getApodo(), je.getEmail(), je.getPassword(), je.getLoggedSession());
+		Usuario j = new Usuario(je.getApodo(), je.getEmail(), je.getPassword());
 		return j;
 	}
 	
 	public void grabar(Usuario j) {
-		UsuarioEntity je = new UsuarioEntity(j.getApodo(), j.getEmail(), j.getPassword(),  j.getLoggedSession());
+		UsuarioEntity je = new UsuarioEntity(j.getApodo(), j.getEmail(), j.getPassword());
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -68,7 +68,7 @@ public class UsuarioDAO {
 		if (je != null) {
 			j.setEmail(je.getEmail());
 			j.setPassword(je.getPassword());
-			j.setLoggedSession(je.getLoggedSession());
+			
 		
 		}
 	

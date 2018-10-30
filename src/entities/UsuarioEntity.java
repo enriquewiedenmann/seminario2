@@ -13,30 +13,28 @@ import javax.persistence.Table;
 @Table(name="Usuario")
 public class UsuarioEntity {
 	
-	private String apodo;
+	private String usuario;
 	@Id
 	private String email;
-	private String password;
-	private String loggedSession;
+	private String pass;
 	
 	
-	public UsuarioEntity(String apodo, String email, String password, String loggedSession) {
-		this.apodo = apodo;
+	public UsuarioEntity(String apodo, String email, String password) {
+		this.usuario = apodo;
 		this.email = email;
-		this.password = password;
+		this.pass = password;
 		
-		this.loggedSession = loggedSession;
 	}
 	public UsuarioEntity(String apodo) {
-		this.apodo = apodo;
+		this.usuario = apodo;
 	}
 	public UsuarioEntity() {
 	}
 	public String getApodo() {
-		return apodo;
+		return usuario;
 	}
 	public void setApodo(String apodo) {
-		this.apodo = apodo;
+		this.usuario = apodo;
 	}
 	public String getEmail() {
 		return email;
@@ -45,18 +43,12 @@ public class UsuarioEntity {
 		this.email = email;
 	}
 	public String getPassword() {
-		return password;
+		return pass;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.pass = password;
 	}
-	public String getLoggedSession() {
-		return loggedSession;
-	}
-	public void setLoggedSession(String loggedSession) {
-		this.loggedSession = loggedSession;
-	}
-	
+
 	
 	
 }

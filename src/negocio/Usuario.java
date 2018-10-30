@@ -11,17 +11,15 @@ public class Usuario {
 	private String apodo;
 	private String email;
 	private String password;
-	private String loggedSession;
 	
 	
 
 	
 
-	public Usuario(String apodo, String email, String password, String loggedSession) {
+	public Usuario(String apodo, String email, String password) {
 		this.apodo = apodo;
 		this.email = email;
 		this.password = password;
-		this.loggedSession = loggedSession;
 	
 	}
 
@@ -51,13 +49,7 @@ public class Usuario {
 
 	
 	
-	public String getLoggedSession() {
-		return loggedSession;
-	}
 
-	public void setLoggedSession(String loggedSession) {
-		this.loggedSession = loggedSession;
-	}
 
 	public boolean passwordCorrecta(String password) {
 		return (this.password.equals(password));
@@ -69,7 +61,6 @@ public class Usuario {
 		UsuarioDTO ud = new UsuarioDTO();
 		ud.setApodo(this.getApodo());
 		ud.setEmail(this.getEmail());
-		ud.setLoggedSession(this.getLoggedSession());
 		ud.setPassword(this.getPassword());
 		return ud;
 	}

@@ -101,6 +101,9 @@
 							Sign Up
 						</a>
 					</div>
+					
+					
+					<input type="hidden" id="action" name="action" value = "1">
 				</form>
 			</div>
 		</div>
