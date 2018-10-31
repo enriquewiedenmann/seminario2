@@ -45,7 +45,7 @@
 			<div class="wrap-login100">
 
 
-				<span class="login100-form-title p-b-26"> Welcome </span> <span
+				<span class="login100-form-title p-b-26"> Regalapp </span> <span
 					class="login100-form-title p-b-48"> <i
 					class="zmdi zmdi-card-giftcard zmdi-hc-fw"></i>
 				</span>

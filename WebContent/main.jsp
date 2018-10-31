@@ -172,7 +172,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="details-right">
 							<img src="img/gift-flat.png" alt=" ">
 							<h3>Welcome To</h3>
-							<h4>Regalap</h4>
+							<h4>Regalapp</h4>
 
 						</div>
 						<div class="banner_search">
@@ -195,6 +195,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						
 						<li><a href="flight.html" class="hvr-radial-out"><i class="fa fa-calendar"></i></a>
 							<h6>Calendario</h6></li>
+							<li><a href="swipe.jsp" class="hvr-radial-out"><i class="fa fa-hand-o-right"></i></a>
+							<h6>swipe</h6></li>
 					</ul>
 				</div>
 				<!-- //banner -->
