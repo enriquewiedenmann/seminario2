@@ -13,6 +13,12 @@
 
 </head>
 <body>
+
+<div data-role="page" id="demo-page" data-title="Cars" data-url="demo-page">
+
+
+    <div data-role="header" data-theme="b">
+       
 	<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 		<a href="#"
 			class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete ui-btn-b"
@@ -25,6 +31,17 @@
 		<a href="#"
 			class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-grid ui-btn-b">More</a>
 	</div>
+       
+    </div><!-- /header -->
+    <div data-role="content">
+        <ul data-role="listview">
+            <li><a href="#" class="cars" id="bmw"><img src="img/bmw-thumb.jpg" alt="BMW"><h2>BMW</h2><p>5 series</p></a></li>
+            <li><a href="#" class="cars" id="landrover"><img src="img/landrover-thumb.jpg" alt="Land Rover"><h2>Land Rover</h2><p>Discovery 4</p></a></li>
+            <li><a href="#" class="cars" id="tesla"><img src="img/tesla-thumb.jpg" alt="Tesla"><h2>Tesla</h2><p>Model S</p></a></li>
+        </ul>
+    </div><!-- /content -->
+</div>
+
 
 
 </body>
