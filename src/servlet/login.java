@@ -50,15 +50,49 @@ public class login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// Assuming your json object is **jsonObject**, perform the following, it will
 		// return your json object
-		String email = request.getParameter("email");
-		String pass = HashUtil.hashString(request.getParameter("pass"));
 
-		UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
-		if ((us!=null)&&(us.getPassword().equals(pass))) {
-			out.print("{\"Error\":\"false\"}");
+		String email = request.getParameter("email");
+		String pass = HashUtil.hashString(request.getParameter("pass").trim());
+
+		if ((request.getParameter("action") != null) && request.getParameter("action").equals("signUp")) {
+			UsuarioDTO us = AdministradorUsuario.getInstancia().login(email.trim());
+			if (us == null) {
+
+				String apodo = request.getParameter("apodo");
+
+				UsuarioDTO newUs = new UsuarioDTO();
+				newUs.setApodo(apodo.trim());
+				newUs.setEmail(email.trim());
+				newUs.setPassword(pass.trim());
+				AdministradorUsuario.getInstancia().guardarUsuario(newUs);
+				us = AdministradorUsuario.getInstancia().login(email);
+
+				
+				HttpSession session = request.getSession();
+				
+				
+				session.setAttribute("userApodo", us.getApodo());
+				session.setAttribute("userId", us.getEmail());
+
+				out.print("{\"Error\":\"false\"}");
+			} else {
+				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
+			}
 		} else {
-			out.print("{\"Error\":\"true\"}");
+			UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
+			if ((us != null) && (us.getPassword().equals(pass))) {
+
+				HttpSession session = request.getSession();
+
+				session.setAttribute("userApodo", us.getApodo());
+				session.setAttribute("userId", us.getEmail());
+
+				out.print("{\"Error\":\"false\"}");
+			} else {
+				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
+			}
 		}
+
 		out.flush();
 	}
 

@@ -45,4 +45,15 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
+	public void  guardarUsuario(UsuarioDTO newUs) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		UsuarioEntity usuarioEntity = new UsuarioEntity(newUs.getApodo(), newUs.getEmail(), newUs.getPassword());
+		session.beginTransaction();
+		session.saveOrUpdate(usuarioEntity);
+		session.getTransaction().commit();
+		
+		session.close();
+	}
+
 }

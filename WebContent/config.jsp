@@ -39,7 +39,7 @@
 						Welcome
 					</span>
 					<span class="login100-form-title p-b-48">
-						<i class="zmdi zmdi-font"></i>
+						<i class="zmdi zmdi-card-giftcard zmdi-hc-fw"></i>
 					</span>
 					<div name="datosSingUp" id="datosSingUp" style="display:none;">
 					<div class="wrap-input100 validate-input" >

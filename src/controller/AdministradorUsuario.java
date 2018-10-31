@@ -29,4 +29,9 @@ public class AdministradorUsuario {
 		return u;
 	}
 
+	public void guardarUsuario(UsuarioDTO newUs) {
+		// TODO Auto-generated method stub
+		 UsuarioDAO.getInstancia().guardarUsuario(newUs);
+	}
+
 }
