@@ -1,3 +1,4 @@
+var murl = "/seminarioMVPV2/login";
 function logIn() {
 
 	var pass = $("#pass").val();
@@ -5,7 +6,6 @@ function logIn() {
 
 	var info;
 
-	var murl = "/seminarioMVPV2/login";
 
 	if ($("#datosSingUp").is(":visible")) {
 
@@ -40,6 +40,24 @@ function logIn() {
 				window.location.replace("./main.jsp");
 
 			}
+
+		}
+	});
+}
+
+function logout(){
+	
+	info = {
+			action : "logOut"
+		}
+
+	$.ajax({
+		type : 'POST',
+		url : murl,
+		data : info,
+		dataType : "json",
+		success : function(resultData) {
+			window.location.replace("./index.jsp");
 
 		}
 	});

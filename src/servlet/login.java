@@ -51,10 +51,11 @@ public class login extends HttpServlet {
 		// Assuming your json object is **jsonObject**, perform the following, it will
 		// return your json object
 
-		String email = request.getParameter("email");
-		String pass = HashUtil.hashString(request.getParameter("pass").trim());
+
 
 		if ((request.getParameter("action") != null) && request.getParameter("action").equals("signUp")) {
+			String email = request.getParameter("email");
+			String pass = HashUtil.hashString(request.getParameter("pass").trim());
 			UsuarioDTO us = AdministradorUsuario.getInstancia().login(email.trim());
 			if (us == null) {
 
@@ -67,10 +68,8 @@ public class login extends HttpServlet {
 				AdministradorUsuario.getInstancia().guardarUsuario(newUs);
 				us = AdministradorUsuario.getInstancia().login(email);
 
-				
 				HttpSession session = request.getSession();
-				
-				
+
 				session.setAttribute("userApodo", us.getApodo());
 				session.setAttribute("userId", us.getEmail());
 
@@ -78,7 +77,9 @@ public class login extends HttpServlet {
 			} else {
 				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
 			}
-		} else {
+		} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("login")) {
+			String email = request.getParameter("email");
+			String pass = HashUtil.hashString(request.getParameter("pass").trim());
 			UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
 			if ((us != null) && (us.getPassword().equals(pass))) {
 
@@ -91,6 +92,10 @@ public class login extends HttpServlet {
 			} else {
 				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
 			}
+		} else {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			out.print("{}");
 		}
 
 		out.flush();
