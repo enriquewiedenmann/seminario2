@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.AdministradorUsuario;
+import controller.AdminsitradorImagen;
+import dao.ImagenDAO;
+import entities.ImagenEntity;
+import negocio.Imagen;
 import utils.HashUtil;
 import view.UsuarioDTO;
 
 /**
  * Servlet implementation class logPage
  */
-@WebServlet("/login")
-public class login extends HttpServlet {
+@WebServlet("/main")
+public class main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public login() {
+	public main() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -72,7 +77,7 @@ public class login extends HttpServlet {
 
 				session.setAttribute("userApodo", us.getApodo());
 				session.setAttribute("userId", us.getEmail());
-
+				
 				out.print("{\"Error\":\"false\"}");
 			} else {
 				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
@@ -92,7 +97,9 @@ public class login extends HttpServlet {
 			} else {
 				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
 			}
-		} else {
+		} else 	if ((request.getParameter("action") != null) && request.getParameter("action").equals("getImages")) {
+	
+		}else{
 			HttpSession session = request.getSession();
 			session.invalidate();
 			out.print("{}");

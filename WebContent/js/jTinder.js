@@ -17,6 +17,10 @@ $("#tinderslide").jTinder({
         	console.log('Se dio la condicion');
         	$('#tinderslide').hide();
         	$('.actions').hide();
+        	
+        	$("#wrap").hide();
+        	
+        	
         }
     },
 	// like callback
@@ -25,8 +29,13 @@ $("#tinderslide").jTinder({
        // $('#status').html('Like image ' + (item.index()+1));
     $('#status').append('<hr>' + item.text() + ' Si');
     
-    if (item.index() == 0) {
-      
+    	if (item.index() == 0) {
+    		
+    		console.log('Se dio la condicion');
+        	$('#tinderslide').hide();
+        	$('.actions').hide();
+        	$("#wrap").hide();
+
         }
 
     },
@@ -44,3 +53,5 @@ $('.actions .like, .actions .dislike').click(function(e){
 	e.preventDefault();
 	$("#tinderslide").jTinder($(this).attr('class'));
 });
+
+$("#logo").hide();

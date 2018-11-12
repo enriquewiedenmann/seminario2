@@ -1,4 +1,4 @@
-var murl = "/seminarioMVPV2/login";
+var murl = "/seminarioMVPV2/main";
 function logIn() {
 
 	var pass = $("#pass").val();

@@ -172,8 +172,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="details-shade">
 						<div class="details-right">
 							<div id="wrap">
-
-
 								<div id="tinderslide">
 									<ul>
 										<li class="bicicleta">
@@ -214,6 +212,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									</ul>
 								</div>
 							</div>
+
 						</div>
 
 					</div>

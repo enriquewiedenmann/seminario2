@@ -3,7 +3,7 @@ package controller;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-
+import entities.ImagenEntity;
 import entities.UsuarioEntity;
 
 public class HibernateUtil
@@ -16,6 +16,8 @@ public class HibernateUtil
         {
         	 AnnotationConfiguration config = new AnnotationConfiguration();
         	 config.addAnnotatedClass(UsuarioEntity.class);
+        	 config.addAnnotatedClass(ImagenEntity.class);
+
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

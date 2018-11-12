@@ -21,7 +21,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/ecj-4.7.3a.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/ejb3-persistence.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/el-api.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/gson-2.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/hibernate-annotations.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/hibernate-commons-annotations.jar"/>
@@ -50,5 +49,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/tomcat-websocket.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/websocket-api.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/apache-tomcat-9.0.12/lib/jcifs-1.3.19.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/java-json.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
