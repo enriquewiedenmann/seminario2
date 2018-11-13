@@ -62,6 +62,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			removalDelay : 300,
 			mainClass : 'my-mfp-zoom-in'
 		});
+		
+		
+		getImages();
 	});
 </script>
 <!--//pop-up-box -->

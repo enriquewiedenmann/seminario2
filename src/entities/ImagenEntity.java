@@ -13,6 +13,10 @@ public class ImagenEntity {
 	private String nombre;
 	private String label;
 
+	public Integer getId() {
+		return idImagen;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

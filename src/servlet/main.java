@@ -11,12 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonSerializationContext;
+
 import controller.AdministradorUsuario;
 import controller.AdminsitradorImagen;
 import dao.ImagenDAO;
 import entities.ImagenEntity;
 import negocio.Imagen;
 import utils.HashUtil;
+import view.ImagenDTO;
 import view.UsuarioDTO;
 
 /**
@@ -56,54 +64,75 @@ public class main extends HttpServlet {
 		// Assuming your json object is **jsonObject**, perform the following, it will
 		// return your json object
 
+		JSONObject resp = new JSONObject();
+		UsuarioDTO newUs = new UsuarioDTO();
 
+		try {
+			if ((request.getParameter("action") != null) && request.getParameter("action").equals("signUp")) {
+				String email = request.getParameter("email");
+				String pass = HashUtil.hashString(request.getParameter("pass").trim());
+				UsuarioDTO us = AdministradorUsuario.getInstancia().login(email.trim());
+				if (us == null) {
 
-		if ((request.getParameter("action") != null) && request.getParameter("action").equals("signUp")) {
-			String email = request.getParameter("email");
-			String pass = HashUtil.hashString(request.getParameter("pass").trim());
-			UsuarioDTO us = AdministradorUsuario.getInstancia().login(email.trim());
-			if (us == null) {
+					String apodo = request.getParameter("apodo");
 
-				String apodo = request.getParameter("apodo");
+					newUs.setApodo(apodo.trim());
+					newUs.setEmail(email.trim());
+					newUs.setPassword(pass.trim());
+					AdministradorUsuario.getInstancia().guardarUsuario(newUs);
+					us = AdministradorUsuario.getInstancia().login(email);
 
-				UsuarioDTO newUs = new UsuarioDTO();
-				newUs.setApodo(apodo.trim());
-				newUs.setEmail(email.trim());
-				newUs.setPassword(pass.trim());
-				AdministradorUsuario.getInstancia().guardarUsuario(newUs);
-				us = AdministradorUsuario.getInstancia().login(email);
+					HttpSession session = request.getSession();
 
-				HttpSession session = request.getSession();
+					session.setAttribute("userApodo", us.getApodo());
+					session.setAttribute("userId", us.getEmail());
 
-				session.setAttribute("userApodo", us.getApodo());
-				session.setAttribute("userId", us.getEmail());
-				
-				out.print("{\"Error\":\"false\"}");
+					resp.put("Error", false);
+
+				} else {
+					resp.put("Error", true);
+					resp.put("ErrorMSG", "Error el usuario no es valido");
+
+				}
+			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("login")) {
+				String email = request.getParameter("email");
+				String pass = HashUtil.hashString(request.getParameter("pass").trim());
+				UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
+				if ((us != null) && (us.getPassword().equals(pass))) {
+
+					HttpSession session = request.getSession();
+
+					session.setAttribute("userApodo", us.getApodo());
+					session.setAttribute("userId", us.getEmail());
+					resp.put("Error", false);
+
+				} else {
+					resp.put("ErrorMSG", "Error el usuario no es valido");
+				}
+			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("getImages")) {
+				List<ImagenDTO> imagenes = AdminsitradorImagen.getInstancia().getImagenes();
+				JSONArray arr = new JSONArray();
+
+				for (ImagenDTO imagenDTO : imagenes) {
+
+					JSONObject jo = new JSONObject(imagenDTO.toJson());
+
+					arr.put(jo);
+				}
+				resp.put("Imagenes", arr);
+
 			} else {
-				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
-			}
-		} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("login")) {
-			String email = request.getParameter("email");
-			String pass = HashUtil.hashString(request.getParameter("pass").trim());
-			UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
-			if ((us != null) && (us.getPassword().equals(pass))) {
-
 				HttpSession session = request.getSession();
-
-				session.setAttribute("userApodo", us.getApodo());
-				session.setAttribute("userId", us.getEmail());
-
-				out.print("{\"Error\":\"false\"}");
-			} else {
-				out.print("{\"Error\":\"true\",\"ErrorMSG\":\"Error el usuario no es valido\"}");
+				session.invalidate();
+				resp.put("Error", true);
 			}
-		} else 	if ((request.getParameter("action") != null) && request.getParameter("action").equals("getImages")) {
-	
-		}else{
-			HttpSession session = request.getSession();
-			session.invalidate();
-			out.print("{}");
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		out.print(resp.toString());
 
 		out.flush();
 	}

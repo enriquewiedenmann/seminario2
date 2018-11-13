@@ -6,10 +6,12 @@ import java.util.List;
 import dao.ImagenDAO;
 import negocio.Imagen;
 import negocio.Usuario;
+import view.ImagenDTO;
 
 public class AdminsitradorImagen {
-	
-	private AdminsitradorImagen() {}
+
+	private AdminsitradorImagen() {
+	}
 
 	private static AdminsitradorImagen instancia;
 
@@ -20,9 +22,15 @@ public class AdminsitradorImagen {
 		return instancia;
 	}
 
-	public List<Imagen> getImagenes() {
-		 List<Imagen> imagenes = ImagenDAO.getInstancia().listaImagenes();
+	public List<ImagenDTO> getImagenes() {
+		List<Imagen> list = ImagenDAO.getInstancia().listaImagenes();
 
-	return null;
+		List<ImagenDTO> resp = new ArrayList<>();
+
+		for (Imagen im : list) {
+			resp.add(new ImagenDTO(im.getIdImagen(), im.getNombre().trim(), im.getLabel()));
+		}
+
+		return resp;
 	}
 }

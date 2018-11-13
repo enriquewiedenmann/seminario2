@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class UsuarioDTO implements Serializable {
+public class UsuarioDTO extends JsonDTO {
 	/**
 	 * 
 	 */
@@ -68,5 +68,12 @@ public class UsuarioDTO implements Serializable {
 		return "UsuarioDTO [apodo=" + apodo + ", email=" + email + ", password=" + password + ", loggedSession="
 				+ loggedSession + "]";
 	}
+
+	@Override
+	public String toJson() {
+		// TODO Auto-generated method stub
+		return getJson(this);
+	}
+
 
 }

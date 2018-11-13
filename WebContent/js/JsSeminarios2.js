@@ -33,7 +33,7 @@ function logIn() {
 		success : function(resultData) {
 			console.log(resultData);
 
-			if (resultData.Error == "true") {
+			if (resultData.Error == true) {
 				$.alertable.alert(resultData.ErrorMSG).always(function() {
 				});
 			} else {
@@ -58,6 +58,42 @@ function logout(){
 		dataType : "json",
 		success : function(resultData) {
 			window.location.replace("./index.jsp");
+
+		}
+	});
+}
+
+function renderImg(Img){
+	var imgLs = "";
+	for (var i = 0;i < Img.Imagenes.length;i++){
+		console.log(Img.Imagenes[i].nombre);
+		
+				
+				imgLs += '<li class="' + Img.Imagenes[i].nombre + '">';
+				imgLs += '<div class="img"';
+				imgLs += 'style="background: url(\'img/regalos/'+Img.Imagenes[i].nombre+'\') no-repeat scroll center center; background-size: contain;"></div>';
+				imgLs += '<div>'+Img.Imagenes[i].label+'</div>';
+				imgLs += '	<div class="like"></div>';
+				imgLs += '	<div class="dislike"></div>';
+				imgLs += '</li>';
+
+	
+	
+	}
+}
+function getImages(){
+	
+	info = {
+			action : "getImages"
+		}
+
+	$.ajax({
+		type : 'POST',
+		url : murl,
+		data : info,
+		dataType : "json",
+		success : function(img) {
+			renderImg(img);
 
 		}
 	});
