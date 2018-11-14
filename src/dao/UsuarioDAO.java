@@ -40,19 +40,20 @@ public class UsuarioDAO {
 	}
 
 	public UsuarioDTO toNegocio(UsuarioEntity usuarioEntity) {
-		UsuarioDTO usuario = new UsuarioDTO(usuarioEntity.getApodo(), usuarioEntity.getEmail(), usuarioEntity.getPassword());
-
+		UsuarioDTO usuario = new UsuarioDTO(usuarioEntity.getApodo(), usuarioEntity.getEmail(),
+				usuarioEntity.getPassword());
+		usuario.setId(usuarioEntity.getId());
 		return usuario;
 	}
 
-	public void  guardarUsuario(UsuarioDTO newUs) {
+	public void guardarUsuario(UsuarioDTO newUs) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		UsuarioEntity usuarioEntity = new UsuarioEntity(newUs.getApodo(), newUs.getEmail(), newUs.getPassword());
 		session.beginTransaction();
 		session.saveOrUpdate(usuarioEntity);
 		session.getTransaction().commit();
-		
+
 		session.close();
 	}
 

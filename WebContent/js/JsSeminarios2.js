@@ -63,15 +63,36 @@ function logout(){
 	});
 }
 
+
+
+function guardarLike(idImagen){
+	
+	info = {
+			action : "like",
+			idImagen : idImagen
+		}
+
+	$.ajax({
+		type : 'POST',
+		url : murl,
+		data : info,
+		dataType : "json",
+		success : function(resultData) {
+
+		}
+	});
+}
+
+
+
 function renderImg(Img){
-	var imgLs = "";
+	var imgLs = "<ul>";
 	for (var i = 0;i < Img.Imagenes.length;i++){
-		console.log(Img.Imagenes[i].nombre);
 		
 				
-				imgLs += '<li class="' + Img.Imagenes[i].nombre + '">';
-				imgLs += '<div class="img"';
-				imgLs += 'style="background: url(\'img/regalos/'+Img.Imagenes[i].nombre+'\') no-repeat scroll center center; background-size: contain;"></div>';
+				imgLs += '<li id="'+Img.Imagenes[i].idImagen+'" >';
+				imgLs += '<div  class="img"';
+				imgLs += ' style="background: url(\'./img/regalos/'+Img.Imagenes[i].nombre+'\') no-repeat scroll center center; background-size: contain;"></div>';
 				imgLs += '<div>'+Img.Imagenes[i].label+'</div>';
 				imgLs += '	<div class="like"></div>';
 				imgLs += '	<div class="dislike"></div>';
@@ -80,6 +101,13 @@ function renderImg(Img){
 	
 	
 	}
+	
+	 imgLs += "</ul>";
+	 
+	 document.getElementById("tinderslide").innerHTML =imgLs;
+	 loadTinder();
+
+//	 $("#tinderslide"). replaceWith(imgLs);
 }
 function getImages(){
 	

@@ -12,7 +12,7 @@ public class UsuarioDTO extends JsonDTO {
 	/**
 	 * 
 	 */
-
+	private int id;
 	private String apodo;
 	private String email;
 	private String password;
@@ -73,6 +73,14 @@ public class UsuarioDTO extends JsonDTO {
 	public String toJson() {
 		// TODO Auto-generated method stub
 		return getJson(this);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 
 import controller.HibernateUtil;
 import entities.ImagenEntity;
+import entities.ImagenUsuarioEntity;
 import entities.UsuarioEntity;
 import negocio.Imagen;
 
@@ -37,14 +38,16 @@ public class ImagenDAO {
 
 		for (ImagenEntity imagenEntity : listImg) {
 			Imagen im = new Imagen();
-			
+
 			im.setLabel(imagenEntity.getLabel());
 			im.setNombre(imagenEntity.getNombre());
 			im.setIdImagen(imagenEntity.getId());
 			imagenes.add(im);
-			
+
 		}
 
 		return imagenes;
 	}
+
+
 }

@@ -66,6 +66,7 @@ public class main extends HttpServlet {
 
 		JSONObject resp = new JSONObject();
 		UsuarioDTO newUs = new UsuarioDTO();
+		HttpSession session = request.getSession();
 
 		try {
 			if ((request.getParameter("action") != null) && request.getParameter("action").equals("signUp")) {
@@ -81,8 +82,6 @@ public class main extends HttpServlet {
 					newUs.setPassword(pass.trim());
 					AdministradorUsuario.getInstancia().guardarUsuario(newUs);
 					us = AdministradorUsuario.getInstancia().login(email);
-
-					HttpSession session = request.getSession();
 
 					session.setAttribute("userApodo", us.getApodo());
 					session.setAttribute("userId", us.getEmail());
@@ -100,10 +99,8 @@ public class main extends HttpServlet {
 				UsuarioDTO us = AdministradorUsuario.getInstancia().login(email);
 				if ((us != null) && (us.getPassword().equals(pass))) {
 
-					HttpSession session = request.getSession();
-
 					session.setAttribute("userApodo", us.getApodo());
-					session.setAttribute("userId", us.getEmail());
+					session.setAttribute("userId", us.getId());
 					resp.put("Error", false);
 
 				} else {
@@ -121,8 +118,15 @@ public class main extends HttpServlet {
 				}
 				resp.put("Imagenes", arr);
 
+			} else if ((request.getParameter("action") != null)
+					&& request.getParameter("action").equals("like")) {
+
+				Integer idImagen = Integer.valueOf(request.getParameter("idImagen"));
+				Integer idUs = (Integer) session.getAttribute("userId");
+
+				AdminsitradorImagen.getInstancia().guardarImagenLike(idImagen, idUs);
+
 			} else {
-				HttpSession session = request.getSession();
 				session.invalidate();
 				resp.put("Error", true);
 			}

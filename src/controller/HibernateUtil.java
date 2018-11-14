@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import entities.ImagenEntity;
+import entities.ImagenUsuarioEntity;
 import entities.UsuarioEntity;
 
 public class HibernateUtil
@@ -17,6 +18,7 @@ public class HibernateUtil
         	 AnnotationConfiguration config = new AnnotationConfiguration();
         	 config.addAnnotatedClass(UsuarioEntity.class);
         	 config.addAnnotatedClass(ImagenEntity.class);
+        	 config.addAnnotatedClass(ImagenUsuarioEntity.class);
 
              sessionFactory = config.buildSessionFactory();
         }

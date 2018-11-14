@@ -176,43 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="details-right">
 							<div id="wrap">
 								<div id="tinderslide">
-									<ul>
-										<li class="bicicleta">
-											<div class="img"
-												style="background: url('images/bicicleta.jpg') no-repeat scroll center center; background-size: contain;"></div>
-											<div>Bicicleta</div>
-											<div class="like"></div>
-											<div class="dislike"></div>
-										</li>
-
-										<li class="remera3">
-											<div class="img"
-												style="background: url('images/remera3.jpg') no-repeat scroll center center; background-size: contain;"></div>
-											<div>Remera</div>
-											<div class="like"></div>
-											<div class="dislike"></div>
-										</li>
-
-										<li class="chocolate">
-											<div class="img"
-												style="background: url('images/chocolate.jpg') no-repeat scroll center center; background-size: contain;"></div>
-											<div>Chocolate</div>
-											<div class="like"></div>
-											<div class="dislike"></div>
-										</li>
-
-
-										<li class="playstation">
-											<div class="img"
-												style="background: url('images/playstation.jpg') no-repeat scroll center center; background-size: contain;"></div>
-
-											<div>Playstation</div>
-											<div class="like"></div>
-											<div class="dislike"></div>
-										</li>
-
-
-									</ul>
+									
 								</div>
 							</div>
 
@@ -221,7 +185,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 				</div>
 				<div class="w3agile banner-bottom">
-					<div id="status"></div>
+					
 
 				</div>
 				<!-- //banner -->

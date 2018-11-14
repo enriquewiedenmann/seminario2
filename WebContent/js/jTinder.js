@@ -1,17 +1,16 @@
 /**
  * jTinder initialization
+ *
  */
+
+function loadTinder(){ 
 $("#tinderslide").jTinder({
 	// dislike callback
     onDislike: function (item) {
 	    // set the status text
-       // $('#status').html('Dislike image ' + (item.index()+1));
 
-        console.log(item);
-        console.log(item.index());
-        console.log(item.text());
-
-        $('#status').append('<hr>' + item.text() + ' No');
+    	guardarLike(item[0].id);
+    //    $('#status').append('<hr>' + item.text() + ' No');
    
         if (item.index() == 0) {
         	console.log('Se dio la condicion');
@@ -26,8 +25,8 @@ $("#tinderslide").jTinder({
 	// like callback
     onLike: function (item) {
 	    // set the status text
-       // $('#status').html('Like image ' + (item.index()+1));
-    $('#status').append('<hr>' + item.text() + ' Si');
+    	console.log(item[0].id);
+  //  $('#status').append('<hr>' + item.text() + ' Si');
     
     	if (item.index() == 0) {
     		
@@ -55,3 +54,4 @@ $('.actions .like, .actions .dislike').click(function(e){
 });
 
 $("#logo").hide();
+}
