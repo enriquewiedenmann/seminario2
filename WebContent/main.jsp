@@ -60,6 +60,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			removalDelay : 300,
 			mainClass : 'my-mfp-zoom-in'
 		});
+		
+		
+	
+			console.log("Ready to bring the awesome.");
+			var sugList = $("#suggestions");
+
+			$("#search").on("input", function(e) {
+				var text = $(this).val();
+				if(text.length < 1) {
+					sugList.html("");
+					sugList.listview("refresh");
+				} else {
+					$.get("searchServ?method=getSuggestions", {search:text}, function(res,code) {
+						var str = "";
+						for(var i=0, len=res.length; i<len; i++) {
+							str += "<li>"+res[i]+"</li>";
+						}
+						sugList.html(str);
+						sugList.listview("refresh");
+						console.dir(res);
+					},"json");
+				}
+			});
+
+	
+		
 	});
 </script>
 <!--//pop-up-box -->
@@ -177,10 +203,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 						<div class="banner_search">
 							<form action="#" method="post">
-								<input type="search" name="search" value="Buscar un amig@ para regalar"
+								<input id="search" type="search" name="search" value="Buscar un amig@ para regalar"
 									onfocus="this.value = '';"
 									onblur="if (this.value == '') {this.value = 'Buscar un amig@ para regalar';}"
-									required=""> <input type="submit" value=" ">
+									required="">
+									<ul id="suggestions" data-role="listview" data-inset="true"></ul>
+									
 							</form>
 						</div>
 	&nbsp;
