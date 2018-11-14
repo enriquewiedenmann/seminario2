@@ -108,7 +108,19 @@ public class main extends HttpServlet {
 					resp.put("ErrorMSG", "Error el usuario no es valido");
 				}
 			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("getImages")) {
-				List<ImagenDTO> imagenes = AdminsitradorImagen.getInstancia().getImagenes();
+				String email = "";
+
+				if (request.getParameter("email") != null) {
+					email = request.getParameter("email");
+				}
+				
+				List<ImagenDTO> imagenes = null;
+				
+				if (email.length()>0)
+					 imagenes = AdminsitradorImagen.getInstancia().getImagenesLike(email);
+				else
+					 imagenes = AdminsitradorImagen.getInstancia().getImagenes();
+				
 				JSONArray arr = new JSONArray();
 
 				for (ImagenDTO imagenDTO : imagenes) {
@@ -119,8 +131,7 @@ public class main extends HttpServlet {
 				}
 				resp.put("Imagenes", arr);
 
-			} else if ((request.getParameter("action") != null)
-					&& request.getParameter("action").equals("like")) {
+			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("like")) {
 
 				Integer idImagen = Integer.valueOf(request.getParameter("idImagen"));
 				Integer idUs = (Integer) session.getAttribute("userId");

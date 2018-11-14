@@ -51,7 +51,7 @@ public class FiendsSearch extends HttpServlet {
 					
 					String usrEmail = usuarioDTO.getEmail();
 					JSONObject ob = new JSONObject();
-					ob.put("email", usrEmail);
+					ob.put("email", usrEmail.trim());
 					
 					resp.put(ob);
 				} catch (JSONException e) {

@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 
 import controller.HibernateUtil;
 import entities.ImagenEntity;
-import entities.ImagenUsuarioEntity;
+import entities.UsuarioImagenEntity;
 import entities.UsuarioEntity;
 import negocio.Imagen;
 
@@ -37,17 +37,32 @@ public class ImagenDAO {
 		session.close();
 
 		for (ImagenEntity imagenEntity : listImg) {
-			Imagen im = new Imagen();
 
-			im.setLabel(imagenEntity.getLabel());
-			im.setNombre(imagenEntity.getNombre());
-			im.setIdImagen(imagenEntity.getId());
-			imagenes.add(im);
+			imagenes.add(toNegocio(imagenEntity));
 
 		}
 
 		return imagenes;
 	}
 
+	public ImagenEntity buscarImagen(Integer idImagen) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		ImagenEntity imagenEnt = (ImagenEntity) session.createQuery("from ImagenEntity where idImagen = ?")
+				.setParameter(0, idImagen).uniqueResult();
+		session.close();
+		
+		return imagenEnt;
+	}
+
+	public Imagen toNegocio(ImagenEntity ime) {
+		Imagen im = new Imagen();
+
+		im.setLabel(ime.getLabel());
+		im.setNombre(ime.getNombre());
+		im.setIdImagen(ime.getId());
+
+		return im;
+	}
 
 }

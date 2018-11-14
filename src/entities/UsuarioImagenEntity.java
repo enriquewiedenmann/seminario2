@@ -4,19 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "UsuarioImagen")
-public class ImagenUsuarioEntity {
+public class UsuarioImagenEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idUsuarioImagen;
+	
+	
+	@OneToOne
+	@JoinColumn(name = "idUsuario")
+	private UsuarioEntity usuario;
 
-	private Integer idUsuario;
-
-	private Integer idImagen;
+	@OneToOne
+	@JoinColumn(name = "idImagen")
+	private ImagenEntity imagen;
 
 	private boolean recomendado;
 
@@ -24,20 +31,20 @@ public class ImagenUsuarioEntity {
 		this.idUsuarioImagen = id;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public UsuarioEntity getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(UsuarioEntity usuario) {
+		this.usuario = usuario;
 	}
 
-	public Integer getIdImagen() {
-		return idImagen;
+	public ImagenEntity getIdImagen() {
+		return imagen;
 	}
 
-	public void setIdImagen(Integer idImagen) {
-		this.idImagen = idImagen;
+	public void setImagen(ImagenEntity imagen) {
+		this.imagen = imagen;
 	}
 
 	public boolean isRecomendado() {

@@ -75,4 +75,14 @@ public class UsuarioDAO {
 		return us;
 	}
 
+	public UsuarioEntity buscarUsuarioById(Integer idUs) {
+		// TODO Auto-generated method stub
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		UsuarioEntity usuarioEntity = (UsuarioEntity) session.createQuery("from UsuarioEntity where idUsuario = ?")
+				.setParameter(0, idUs).uniqueResult();
+		session.close();
+		return usuarioEntity;
+	}
+
 }

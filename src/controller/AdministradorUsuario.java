@@ -7,6 +7,7 @@ import view.UsuarioDTO;
 import negocio.Usuario;
 
 import dao.UsuarioDAO;
+import entities.UsuarioEntity;
 
 public class AdministradorUsuario {
 
@@ -38,6 +39,11 @@ public class AdministradorUsuario {
 	public List<UsuarioDTO> buscarAmigos(String email) {
 		// TODO Auto-generated method stub
 		return  UsuarioDAO.getInstancia().buscarAmigos(email);
+	}
+
+	public UsuarioEntity buscarUsuario(Integer idUs) {
+		// TODO Auto-generated method stub
+		return  UsuarioDAO.getInstancia().buscarUsuarioById(idUs);
 	}
 
 }

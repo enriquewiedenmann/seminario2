@@ -62,7 +62,11 @@ function logout(){
 		}
 	});
 }
-
+function userSwipe(email){
+	
+	window.location.replace("./swipe.jsp?email="+email);
+	
+}
 
 
 function guardarLike(idImagen){
@@ -107,12 +111,13 @@ function renderImg(Img){
 	 document.getElementById("tinderslide").innerHTML =imgLs;
 	 loadTinder();
 
-//	 $("#tinderslide"). replaceWith(imgLs);
+// $("#tinderslide"). replaceWith(imgLs);
 }
-function getImages(){
+function getImages(email){
 	
 	info = {
-			action : "getImages"
+			action : "getImages",
+				email : email
 		}
 
 	$.ajax({
@@ -144,9 +149,12 @@ $( document ).on( "pageinit", "#demo-page", function() {
             header = '<div data-role="header"><h2>' + brand + ' ' + model + '</h2></div>',
             img = '<img src="img/' + short + '.jpg" alt="' + brand + '" class="photo">',
             popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15">' + closebtn + header + img + '</div>';
-        // Create the popup. Trigger "pagecreate" instead of "create" because currently the framework doesn't bind the enhancement of toolbars to the "create" event (js/widgets/page.sections.js).
+        // Create the popup. Trigger "pagecreate" instead of "create" because
+		// currently the framework doesn't bind the enhancement of toolbars to
+		// the "create" event (js/widgets/page.sections.js).
         $.mobile.activePage.append( popup ).trigger( "pagecreate" );
-        // Wait with opening the popup until the popup image has been loaded in the DOM.
+        // Wait with opening the popup until the popup image has been loaded in
+		// the DOM.
         // This ensures the popup gets the correct size and position
         $( ".photo", "#popup-" + short ).load(function() {
             var height = $( this ).height(),
@@ -174,3 +182,25 @@ $( document ).on( "pageinit", "#demo-page", function() {
         $( this ).remove();
     });
 });
+
+function parse_query_string(query) {
+	  var vars = query.split("&");
+	  var query_string = {};
+	  for (var i = 0; i < vars.length; i++) {
+	    var pair = vars[i].split("=");
+	    var key = decodeURIComponent(pair[0]);
+	    var value = decodeURIComponent(pair[1]);
+	    // If first entry with this name
+	    if (typeof query_string[key] === "undefined") {
+	      query_string[key] = decodeURIComponent(value);
+	      // If second entry with this name
+	    } else if (typeof query_string[key] === "string") {
+	      var arr = [query_string[key], decodeURIComponent(value)];
+	      query_string[key] = arr;
+	      // If third or later entry with this name
+	    } else {
+	      query_string[key].push(decodeURIComponent(value));
+	    }
+	  }
+	  return query_string;
+	}

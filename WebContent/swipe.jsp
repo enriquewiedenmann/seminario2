@@ -8,8 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <html lang="en">
 <head>
-<title>Travel Hunt App A Mobile App Flat Bootstrap Responsive
-	Website Template | Single :: w3layouts</title>
+<title>Regalapp</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -62,9 +61,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			removalDelay : 300,
 			mainClass : 'my-mfp-zoom-in'
 		});
-		
-		
-		getImages();
+		var url = new URL(window.location.href);
+		getImages(url.searchParams.get("email"));
 	});
 </script>
 <!--//pop-up-box -->

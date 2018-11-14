@@ -8,12 +8,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <html lang="en">
 <head>
-<title>Travel Hunt App A Mobile App Flat Bootstrap Responsive
-	Website Template | Single :: w3layouts</title>
+<title>Regalapp</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords"
-	content="Travel Hunt App Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android  Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript">
 	 addEventListener("load", function() {setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
@@ -74,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					$.get("FiendsSearch", {search:text}, function(res,code) {
 						var str = "";
 						for(var i=0, len=res.length; i<len; i++) {
-							str += "<li><a hfef='#'>"+res[i].email.trim()+"</a></li>";
+							str += "<li><a hfef='#' onClick='userSwipe(\""+res[i].email.trim()+"\");'>"+res[i].email.trim()+"</a></li>";
 						}
 						sugList.html(str);
 						console.dir(res);
@@ -205,7 +202,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									onfocus="this.value = '';"
 									onblur="if (this.value == '') {this.value = 'Buscar un amig@ para regalar';}"
 									required="">
-									<ul id="suggestions" data-role="listview" data-inset="true"></ul>
+									<ul id="suggestions"  class="rounded-list" data-role="listview" data-inset="true"></ul>
 									
 							</form>
 						</div>

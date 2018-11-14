@@ -9,7 +9,7 @@ $("#tinderslide").jTinder({
     onDislike: function (item) {
 	    // set the status text
 
-    	guardarLike(item[0].id);
+    	
     //    $('#status').append('<hr>' + item.text() + ' No');
    
         if (item.index() == 0) {
@@ -25,9 +25,8 @@ $("#tinderslide").jTinder({
 	// like callback
     onLike: function (item) {
 	    // set the status text
-    	console.log(item[0].id);
   //  $('#status').append('<hr>' + item.text() + ' Si');
-    
+    	guardarLike(item[0].id);
     	if (item.index() == 0) {
     		
     		console.log('Se dio la condicion');
