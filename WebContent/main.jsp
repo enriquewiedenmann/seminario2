@@ -70,15 +70,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				var text = $(this).val();
 				if(text.length < 1) {
 					sugList.html("");
-					sugList.listview("refresh");
-				} else {
-					$.get("searchServ?method=getSuggestions", {search:text}, function(res,code) {
+				} else if(text.length > 3 )  {
+					$.get("FiendsSearch", {search:text}, function(res,code) {
 						var str = "";
 						for(var i=0, len=res.length; i<len; i++) {
-							str += "<li>"+res[i]+"</li>";
+							str += "<li><a hfef='#'>"+res[i].email.trim()+"</a></li>";
 						}
 						sugList.html(str);
-						sugList.listview("refresh");
 						console.dir(res);
 					},"json");
 				}

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import negocio.Usuario;
 import view.UsuarioDTO;
@@ -55,6 +56,23 @@ public class UsuarioDAO {
 		session.getTransaction().commit();
 
 		session.close();
+	}
+
+	public List<UsuarioDTO> buscarAmigos(String email) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		List<UsuarioEntity> usuarioEntity = (List<UsuarioEntity>) session
+				.createQuery("from UsuarioEntity where email like ?").setParameter(0, "%"+email+"%").list();
+		session.close();
+
+		List<UsuarioDTO> us = new ArrayList<UsuarioDTO>();
+
+		for (UsuarioEntity e : usuarioEntity) {
+
+			us.add(toNegocio(e));
+		}
+
+		return us;
 	}
 
 }

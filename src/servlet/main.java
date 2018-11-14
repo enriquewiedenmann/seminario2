@@ -104,6 +104,7 @@ public class main extends HttpServlet {
 					resp.put("Error", false);
 
 				} else {
+					resp.put("Error", true);
 					resp.put("ErrorMSG", "Error el usuario no es valido");
 				}
 			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("getImages")) {

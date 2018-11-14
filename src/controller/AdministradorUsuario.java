@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import view.UsuarioDTO;
 import negocio.Usuario;
@@ -32,6 +33,11 @@ public class AdministradorUsuario {
 	public void guardarUsuario(UsuarioDTO newUs) {
 		// TODO Auto-generated method stub
 		 UsuarioDAO.getInstancia().guardarUsuario(newUs);
+	}
+
+	public List<UsuarioDTO> buscarAmigos(String email) {
+		// TODO Auto-generated method stub
+		return  UsuarioDAO.getInstancia().buscarAmigos(email);
 	}
 
 }
