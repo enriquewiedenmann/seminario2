@@ -73,7 +73,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div id="menu" class="panel" role="navigation">
 				<div class="wrap-content">
 					<div class="profile-menu text-center">
-						<img class="border-effect" src="img/gift-flat.png" alt=" ">
+						<a href = "./main.jsp"  ><img class="border-effect" src="img/gift-flat.png" alt=" "></a>
 						<h3>MENU</h3>
 
 						<div class="pro-menu">
