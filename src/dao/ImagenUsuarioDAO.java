@@ -36,11 +36,12 @@ public class ImagenUsuarioDAO {
 
 		ImagenEntity imgEnt = AdminsitradorImagen.getInstancia().buscarImagen(idImagen);
 		UsuarioEntity usEnt = AdministradorUsuario.getInstancia().buscarUsuario(idUs);
-
+		
 		im.setImagen(imgEnt);
 		im.setUsuario(usEnt);
 		im.setRecomendado(false);
 		im.setId(null);
+	
 		// TODO Auto-generated method stub
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -58,7 +59,7 @@ public class ImagenUsuarioDAO {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		List<UsuarioImagenEntity> listImg = (List<UsuarioImagenEntity>) session
-				.createQuery("from UsuarioImagenEntity where idUsuario=?").setParameter(0, us.getId()).list();
+				.createQuery("from UsuarioImagenEntity where idUsuario=? AND reservadoPor is null").setParameter(0, us.getId()).list();
 
 		session.close();
 
@@ -68,6 +69,48 @@ public class ImagenUsuarioDAO {
 
 		}
 		return imagenes;
+	}
+
+	public List<Imagen> buscarReservados(Integer us) {
+		List<Imagen> imagenes = new ArrayList<>();
+
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		List<UsuarioImagenEntity> listImg = (List<UsuarioImagenEntity>) session
+				.createQuery("from UsuarioImagenEntity where reservadoPor =?").setParameter(0, us).list();
+
+		session.close();
+
+		for (UsuarioImagenEntity imagenEntity : listImg) {
+			
+			imagenes.add(ImagenDAO.getInstancia().toNegocio(imagenEntity));
+
+		}
+		return imagenes;
+	}
+	
+	
+	public void ReservarRegalo(Integer idImagen, Integer idUs) {
+		UsuarioImagenEntity im = new UsuarioImagenEntity();
+
+		ImagenEntity imgEnt = AdminsitradorImagen.getInstancia().buscarImagen(idImagen);
+	
+		UsuarioEntity usResevadoPor = AdministradorUsuario.getInstancia().buscarUsuario(idUs);
+		im.setImagen(imgEnt);
+		
+		im.setRecomendado(false);
+		im.setId(null);
+		im.setReservadoPor(usResevadoPor);
+		// TODO Auto-generated method stub
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		session.saveOrUpdate(im);
+
+		session.getTransaction().commit();
+		session.close();
+
+		
 	}
 
 }

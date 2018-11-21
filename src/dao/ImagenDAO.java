@@ -55,12 +55,24 @@ public class ImagenDAO {
 		return imagenEnt;
 	}
 
-	public Imagen toNegocio(ImagenEntity ime) {
+	public Imagen toNegocio(ImagenEntity imagenEntity) {
 		Imagen im = new Imagen();
 
-		im.setLabel(ime.getLabel());
-		im.setNombre(ime.getNombre());
-		im.setIdImagen(ime.getId());
+		im.setLabel(imagenEntity.getLabel());
+		im.setNombre(imagenEntity.getNombre());
+		im.setIdImagen(imagenEntity.getId());
+
+		return im;
+	}
+
+	public Imagen toNegocio(UsuarioImagenEntity imagenEntity) {
+		Imagen im = new Imagen();
+		Imagen im2 = ImagenDAO.getInstancia().toNegocio(imagenEntity.getIdImagen());
+		im.setLabel(im2.getLabel());
+		im.setNombre(im2.getNombre());
+		im.setIdImagen(im2.getIdImagen());
+		im.setPara(imagenEntity.getUsuario().getApodo());
+		
 
 		return im;
 	}

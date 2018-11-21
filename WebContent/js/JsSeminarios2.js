@@ -88,6 +88,26 @@ function guardarLike(idImagen){
 }
 
 
+function reservarRegalo(idImagen){
+	
+	info = {
+			action : "reservar",
+			idImagen : idImagen
+		}
+
+	$.ajax({
+		type : 'POST',
+		url : murl,
+		data : info,
+		dataType : "json",
+		success : function(resultData) {
+
+		}
+	});
+}
+
+
+
 
 function renderImg(Img){
 	var imgLs = "<ul>";

@@ -5,6 +5,7 @@ public class ImagenDTO extends JsonDTO{
 
 	private String nombre;
 	private String label;
+	private String para;
 
 	public ImagenDTO(Integer idImagen, String nombre, String label) {
 
@@ -35,6 +36,16 @@ public class ImagenDTO extends JsonDTO{
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	
+	
+	public String getPara() {
+		return para;
+	}
+
+	public void setPara(String para) {
+		this.para = para;
 	}
 
 	@Override

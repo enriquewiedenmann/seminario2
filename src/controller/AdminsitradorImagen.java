@@ -43,9 +43,16 @@ public class AdminsitradorImagen {
 		ImagenUsuarioDAO.getInstancia().guardarImagenLike(idImagen, idUs);
 	}
 
+	public void reservarRegalo(Integer idImagen , Integer idUs) {
+
+		ImagenUsuarioDAO.getInstancia().ReservarRegalo(idImagen ,idUs);
+	}		
+	
+	
 	public List<ImagenDTO> getImagenesLike(String email) {
 		UsuarioDTO us = UsuarioDAO.getInstancia().buscarUsuarioByApodo(email);
 		List<Imagen> list = ImagenUsuarioDAO.getInstancia().buscarImagenLike(us);
+
 
 		
 		
@@ -59,6 +66,29 @@ public class AdminsitradorImagen {
 
 	}
 
+	
+	
+	public List<ImagenDTO> getImagenesReserva(Integer idUs) {
+		
+		List<Imagen> list = ImagenUsuarioDAO.getInstancia().buscarReservados(idUs);
+
+
+		
+		
+		List<ImagenDTO> resp = new ArrayList<ImagenDTO>();
+
+		for (Imagen im : list) {
+			ImagenDTO dto =	new ImagenDTO(im.getIdImagen(), im.getNombre().trim(), im.getLabel().trim());
+			dto.setPara(im.getPara());
+			
+			resp.add(dto);
+		}
+
+		return resp;
+
+	}
+	
+	
 	public ImagenEntity buscarImagen(Integer idImagen) {
 		// TODO Auto-generated method stub
 		return ImagenDAO.getInstancia().buscarImagen(idImagen);

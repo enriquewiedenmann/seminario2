@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonSerializationContext;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Parameter;
 
 import controller.AdministradorUsuario;
 import controller.AdminsitradorImagen;
@@ -138,6 +139,20 @@ public class main extends HttpServlet {
 
 				AdminsitradorImagen.getInstancia().guardarImagenLike(idImagen, idUs);
 
+			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("reservar")) {
+
+				Integer idImagen = Integer.valueOf(request.getParameter("idImagen"));
+				Integer idUs = (Integer) session.getAttribute("userId");
+
+				AdminsitradorImagen.getInstancia().reservarRegalo(idImagen, idUs);
+				session.setAttribute("regalos", AdminsitradorImagen.getInstancia().getImagenesReserva(idUs));
+				response.sendRedirect("/listaRegalos.jsp");
+				
+				
+				
+				
+						
+						
 			} else {
 				session.invalidate();
 				resp.put("Error", true);

@@ -25,8 +25,13 @@ public class UsuarioImagenEntity {
 	@JoinColumn(name = "idImagen")
 	private ImagenEntity imagen;
 
+	
 	private boolean recomendado;
 
+	@OneToOne
+	@JoinColumn(name = "reservadoPor")
+	private UsuarioEntity reservadoPor;
+	
 	public void setId(Integer id) {
 		this.idUsuarioImagen = id;
 	}
@@ -55,4 +60,13 @@ public class UsuarioImagenEntity {
 		this.recomendado = recomendado;
 	}
 
+	public UsuarioEntity getReservadoPor() {
+		return reservadoPor;
+	}
+
+	public void setReservadoPor(UsuarioEntity reservadoPor) {
+		this.reservadoPor = reservadoPor;
+	}
+
+	
 }
