@@ -26,6 +26,7 @@ $("#tinderslide").jTinder({
     onLike: function (item) {
 	    // set the status text
   //  $('#status').append('<hr>' + item.text() + ' Si');
+    	
     	guardarLike(item[0].id);
     	if (item.index() == 0) {
     		

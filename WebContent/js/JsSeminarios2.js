@@ -62,18 +62,22 @@ function logout(){
 		}
 	});
 }
-function userSwipe(email){
+
+function userSwipe(email,accion){
 	
-	window.location.replace("./swipe.jsp?email="+email);
+	window.location.replace("./swipe.jsp?email="+email+"&act="+accion);
 	
 }
 
 
 function guardarLike(idImagen){
+	var url = new URL(window.location.href);
+	
 	
 	info = {
-			action : "like",
-			idImagen : idImagen
+			action : url.searchParams.get("act"),
+			idImagen : idImagen,
+			agasajado : url.searchParams.get("email")
 		}
 
 	$.ajax({
@@ -137,7 +141,8 @@ function getImages(email){
 	
 	info = {
 			action : "getImages",
-				email : email
+			email : email
+			
 		}
 
 	$.ajax({

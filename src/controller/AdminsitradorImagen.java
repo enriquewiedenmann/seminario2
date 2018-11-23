@@ -43,9 +43,9 @@ public class AdminsitradorImagen {
 		ImagenUsuarioDAO.getInstancia().guardarImagenLike(idImagen, idUs);
 	}
 
-	public void reservarRegalo(Integer idImagen , Integer idUs) {
+	public void reservarRegalo(Integer idImagen , Integer idUs, String agasajdo) {
 
-		ImagenUsuarioDAO.getInstancia().ReservarRegalo(idImagen ,idUs);
+		ImagenUsuarioDAO.getInstancia().ReservarRegalo(idImagen ,idUs,agasajdo);
 	}		
 	
 	

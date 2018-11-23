@@ -73,11 +73,12 @@ public class ImagenUsuarioDAO {
 
 	public List<Imagen> buscarReservados(Integer us) {
 		List<Imagen> imagenes = new ArrayList<>();
-
+	
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		List<UsuarioImagenEntity> listImg = (List<UsuarioImagenEntity>) session
-				.createQuery("from UsuarioImagenEntity where reservadoPor =?").setParameter(0, us).list();
+				.createQuery("from UsuarioImagenEntity where reservadoPor=? ").setParameter(0, us).list();
+
 
 		session.close();
 
@@ -90,16 +91,12 @@ public class ImagenUsuarioDAO {
 	}
 	
 	
-	public void ReservarRegalo(Integer idImagen, Integer idUs) {
-		UsuarioImagenEntity im = new UsuarioImagenEntity();
-
-		ImagenEntity imgEnt = AdminsitradorImagen.getInstancia().buscarImagen(idImagen);
-	
-		UsuarioEntity usResevadoPor = AdministradorUsuario.getInstancia().buscarUsuario(idUs);
-		im.setImagen(imgEnt);
+	public void ReservarRegalo(Integer idImagen, Integer idUs, String agasajado) {
 		
-		im.setRecomendado(false);
-		im.setId(null);
+		UsuarioDTO us = new UsuarioDTO() ;
+		us.setId(UsuarioDAO.getInstancia().buscarUsuarioByApodo(agasajado).getId());
+		UsuarioImagenEntity im = this.buscarImagenUsuarioByUsuario(us,idImagen);
+		UsuarioEntity usResevadoPor = AdministradorUsuario.getInstancia().buscarUsuario(idUs);
 		im.setReservadoPor(usResevadoPor);
 		// TODO Auto-generated method stub
 		SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -110,6 +107,19 @@ public class ImagenUsuarioDAO {
 		session.getTransaction().commit();
 		session.close();
 
+		
+	}
+
+	private UsuarioImagenEntity buscarImagenUsuarioByUsuario(UsuarioDTO us, Integer idImagen) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		UsuarioImagenEntity UsuarioImagenEntity = (UsuarioImagenEntity) session.createQuery("from UsuarioImagenEntity where idUsuario = ? and idImagen = ?")
+				.setParameter(0, us.getId()).setParameter(1, idImagen).uniqueResult();
+		session.close();
+		
+			// pasarla ! a un metodo de busqueda nuevo throw new UsuarioException("El
+			// usuario con apodo: " + apodo + "no existe en la base de datos.");
+			return UsuarioImagenEntity;
 		
 	}
 

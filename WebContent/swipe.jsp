@@ -181,16 +181,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 
 					</div>
+		<div class="actions">
+		<p>TE GUSTA?</p>
+        <a href="#" class="dislike"><i></i></a>
+        
+        <a href="#" class="like"><i></i></a>
+    	</div>
 				</div>
-				<div class="w3agile banner-bottom">
-					
-
-				</div>
+		
+			
 				<!-- //banner -->
 				<!--/welcome-->
 
 				<!--//welcome-->
-				<!--/footer-->
+				<!--/footer
 				<div class="w3agile footer">
 					<div class="col-md-3 w3agile_footer_grid"></div>
 					<div class="col-md-2 w3agile_footer_grid"></div>
@@ -198,6 +202,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="col-md-3 w3agile_footer_grid"></div>
 					<div class="clearfix"></div>
 				</div>
+				-->
 				<div class="w3agile agileinfo_copy_right">
 					<div class="agileinfo_copy_right_left">
 						<p>Regalap</p>
@@ -237,6 +242,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 			</div>
 		</div>
+		
+
 		<script src="js/mainPage/jquery.nicescroll.js"></script>
 		<script src="js/mainPage/scripts.js"></script>
 		<!-- jTinder status text  -->

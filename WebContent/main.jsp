@@ -71,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					$.get("FiendsSearch", {search:text}, function(res,code) {
 						var str = "";
 						for(var i=0, len=res.length; i<len; i++) {
-							str += "<li><a hfef='#' onClick='userSwipe(\""+res[i].email.trim()+"\");'>"+res[i].email.trim()+"</a></li>";
+							str += "<li><a hfef='#' onClick='userSwipe(\""+res[i].email.trim()+"\",\"reservar\");'>"+res[i].email.trim()+"</a></li>";
 						}
 						sugList.html(str);
 						console.dir(res);
@@ -218,7 +218,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						
 						<li><a href="flight.html" class="hvr-radial-out"><i class="fa fa-calendar"></i></a>
 							<h6>Calendario</h6></li>
-							<li><a href="swipe.jsp" class="hvr-radial-out"><i class="fa fa-hand-o-right"></i></a>
+							<li><a href="swipe.jsp?act=like" class="hvr-radial-out"><i class="fa fa-hand-o-right"></i></a>
 							<h6>swipe</h6></li>
 					</ul>
 				</div>

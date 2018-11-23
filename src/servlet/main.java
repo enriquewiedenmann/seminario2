@@ -143,8 +143,8 @@ public class main extends HttpServlet {
 
 				Integer idImagen = Integer.valueOf(request.getParameter("idImagen"));
 				Integer idUs = (Integer) session.getAttribute("userId");
-
-				AdminsitradorImagen.getInstancia().reservarRegalo(idImagen, idUs);
+				String agasajado= request.getParameter("agasajado");
+				AdminsitradorImagen.getInstancia().reservarRegalo(idImagen, idUs, agasajado);
 				session.setAttribute("regalos", AdminsitradorImagen.getInstancia().getImagenesReserva(idUs));
 				response.sendRedirect("/listaRegalos.jsp");
 				
