@@ -54,4 +54,12 @@ public class ImagenDTO extends JsonDTO{
 		return getJson(this);
 	}
 
+	@Override
+	public String toString() {
+		return "ImagenDTO [idImagen=" + idImagen + ", nombre=" + nombre
+				+ ", label=" + label + ", para=" + para + "]";
+	}
+	
+	
+
 }

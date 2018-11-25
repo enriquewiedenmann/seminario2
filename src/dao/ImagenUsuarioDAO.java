@@ -59,7 +59,7 @@ public class ImagenUsuarioDAO {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		List<UsuarioImagenEntity> listImg = (List<UsuarioImagenEntity>) session
-				.createQuery("from UsuarioImagenEntity where idUsuario=? AND reservadoPor is null").setParameter(0, us.getId()).list();
+				.createQuery("from UsuarioImagenEntity where idUsuario=? AND reservadoPor is null").setParameter(0, us.getId()).list(); //from UsuarioImagenEntity where idUsuario=? AND reservadoPor is null
 
 		session.close();
 
@@ -76,15 +76,19 @@ public class ImagenUsuarioDAO {
 	
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		List<UsuarioImagenEntity> listImg = (List<UsuarioImagenEntity>) session
-				.createQuery("from UsuarioImagenEntity where reservadoPor=? ").setParameter(0, us).list();
-
+		
+		
+	List<UsuarioImagenEntity>lista = (List<UsuarioImagenEntity>)session.createQuery("from UsuarioImagenEntity where reservadoPor.idUsuario=? ").setParameter(0, us).list();
+		
+		
+	
+		
 
 		session.close();
 
-		for (UsuarioImagenEntity imagenEntity : listImg) {
-			
-			imagenes.add(ImagenDAO.getInstancia().toNegocio(imagenEntity));
+		for (UsuarioImagenEntity imagenEntity : lista) {
+				
+	imagenes.add(ImagenDAO.getInstancia().toNegocio(imagenEntity));
 
 		}
 		return imagenes;
@@ -113,14 +117,34 @@ public class ImagenUsuarioDAO {
 	private UsuarioImagenEntity buscarImagenUsuarioByUsuario(UsuarioDTO us, Integer idImagen) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		UsuarioImagenEntity UsuarioImagenEntity = (UsuarioImagenEntity) session.createQuery("from UsuarioImagenEntity where idUsuario = ? and idImagen = ?")
-				.setParameter(0, us.getId()).setParameter(1, idImagen).uniqueResult();
+		List<UsuarioImagenEntity> UsuarioImagenEntity = (List<UsuarioImagenEntity>) session.createQuery("from UsuarioImagenEntity where idUsuario = ? and idImagen = ?")
+				.setParameter(0, us.getId()).setParameter(1, idImagen).list();
 		session.close();
+		
+		
 		
 			// pasarla ! a un metodo de busqueda nuevo throw new UsuarioException("El
 			// usuario con apodo: " + apodo + "no existe en la base de datos.");
-			return UsuarioImagenEntity;
+			return UsuarioImagenEntity.get(0);
 		
+	}
+
+	public List<Imagen> buscarImagenLike(Integer idUs) {
+		List<Imagen> imagenes = new ArrayList<>();
+
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		List<UsuarioImagenEntity> listImg = (List<UsuarioImagenEntity>) session
+				.createQuery("from UsuarioImagenEntity where idUsuario=? ").setParameter(0, idUs).list(); //from UsuarioImagenEntity where idUsuario=? AND reservadoPor is null
+
+		session.close();
+
+		for (UsuarioImagenEntity imagenEntity : listImg) {
+
+			imagenes.add(ImagenDAO.getInstancia().toNegocio(imagenEntity.getIdImagen()));
+
+		}
+		return imagenes;
 	}
 
 }

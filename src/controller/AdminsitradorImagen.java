@@ -93,4 +93,20 @@ public class AdminsitradorImagen {
 		// TODO Auto-generated method stub
 		return ImagenDAO.getInstancia().buscarImagen(idImagen);
 	}
+
+	public List<ImagenDTO> getImagenesLike(Integer idUs) {
+		
+		List<Imagen> list = ImagenUsuarioDAO.getInstancia().buscarImagenLike(idUs);
+
+
+		
+		
+		List<ImagenDTO> resp = new ArrayList<>();
+
+		for (Imagen im : list) {
+			resp.add(new ImagenDTO(im.getIdImagen(), im.getNombre().trim(), im.getLabel().trim()));
+		}
+
+		return resp;
+	}
 }

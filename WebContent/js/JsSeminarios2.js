@@ -1,4 +1,61 @@
 var murl = "/seminarioMVPV2/main";
+
+function alLike(){
+	window.location.replace("./swipe.jsp?act=like");
+}
+
+function tutorial(){
+	window.location.replace("./tutorial.jsp");
+}
+
+function alMain(){
+	window.location.replace("./main.jsp");
+}
+
+function paraRegalar(){
+	
+	
+	
+	info = {
+			action : 'paraRegalar',
+			
+			
+		}
+
+	$.ajax({
+		type : 'POST',
+		url : murl,
+		data : info,
+		dataType : "json",
+		success : function(resultData) {
+			window.location.replace("./listaRegalos2.jsp");
+
+		}
+	});
+}
+
+function misCosas(){
+
+	
+	info = {
+			action : 'misCosas',
+			
+			
+		}
+
+	$.ajax({
+		type : 'POST',
+		url : murl,
+		data : info,
+		dataType : "json",
+		success : function(resultData) {
+			window.location.replace("./listaRegalos3.jsp");
+
+		}
+	});
+
+}
+
 function logIn() {
 
 	var pass = $("#pass").val();
@@ -37,8 +94,11 @@ function logIn() {
 				$.alertable.alert(resultData.ErrorMSG).always(function() {
 				});
 			} else {
+				if(resultData.tutorial){
+					window.location.replace("./tutorial.jsp");
+				}else{
 				window.location.replace("./main.jsp");
-
+				}
 			}
 
 		}
@@ -86,6 +146,9 @@ function guardarLike(idImagen){
 		data : info,
 		dataType : "json",
 		success : function(resultData) {
+			if (resultData.action == "reservar") {
+			window.location.replace("./listaRegalos2.jsp");
+			}
 
 		}
 	});
@@ -105,7 +168,7 @@ function reservarRegalo(idImagen){
 		data : info,
 		dataType : "json",
 		success : function(resultData) {
-
+		
 		}
 	});
 }
@@ -115,6 +178,13 @@ function reservarRegalo(idImagen){
 
 function renderImg(Img){
 	var imgLs = "<ul>";
+	if(Img.Imagenes.length==0){
+		imgLs += '<li id="0" >';
+		imgLs += '<div  onClick="alMain()" class="img"';
+		imgLs += ' style="background: url(\'./img/carita triste.png\') no-repeat scroll center center; background-size: contain;"></div>';
+		imgLs += '<div>Lo sentimos, no hay regalos.</div>';
+		imgLs += '</li>';
+	}else{
 	for (var i = 0;i < Img.Imagenes.length;i++){
 		
 				
@@ -128,6 +198,7 @@ function renderImg(Img){
 
 	
 	
+	}
 	}
 	
 	 imgLs += "</ul>";

@@ -4,6 +4,11 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"
+    import = "java.util.List"
+    import = "view.ImagenDTO"
+    %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -50,28 +55,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- pop-up-box -->
 <script src="js/mainPage/jquery.magnific-popup.js"
 	type="text/javascript"></script>
-<script>
-	$(document).ready(function() {
-		$('.popup-top-anim').magnificPopup({
-			type : 'inline',
-			fixedContentPos : false,
-			fixedBgPos : true,
-			overflowY : 'auto',
-			closeBtnInside : true,
-			preloader : false,
-			midClick : true,
-			removalDelay : 300,
-			mainClass : 'my-mfp-zoom-in'
-		});
-		var url = new URL(window.location.href);
-		if(url.searchParams.get("act")=='like'){
-			document.getElementById("help").innerHTML = "TE GUSTA?";
-		}else{
-			document.getElementById("help").innerHTML = "SE LO QUERES REGALAR?";
-		}
-		getImages(url.searchParams.get("email"));
-	});
-</script>
+
 <!--//pop-up-box -->
 </head>
 <body>
@@ -83,7 +67,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<a href = "./main.jsp"  ><img class="border-effect" src="img/gift-flat.png" alt=" "></a>
 						<h3>MENU</h3>
 
-						<div class="pro-menu">
+					<div class="pro-menu">
 							<div class="logo">
 								
 								<li><a class=" link link--yaku  active" onClick="misCosas()"  href="#">Mis cosas</a></li>
@@ -177,37 +161,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="clearfix"></div>
 				</div>
 				<!-- banner -->
+				
 				<div class="details-grid">
 					<div class="details-shade">
 						<div class="details-right">
 							<div id="wrap">
-	<div class="dropdown">
-		    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="color:#2ad2c9">FILTRAR
-		    <span class="caret"></span></button>
-		    <ul class="dropdown-menu">
-		      <li class="disabled"><a href="#">ROPA</a></li>
-		      <li class="disabled"><a href="#">COMPUTACION</a></li>
-		      <li class="disabled"><a href="#">EXPERIENCIA</a></li>
-		      <li class="disabled"><a href="#">SORPRENDEME</a></li>
-		    </ul>
-  </div>
-								<div id="tinderslide">
-									
-								</div>
+								<div class="row" id="tinderSlide">
+								
+									<%
+
+List<ImagenDTO> regalos = (List<ImagenDTO>) session.getAttribute("regalos");
+
+for(ImagenDTO img : regalos){
+	
+	out.println("<div class=\"row\"><img src=\"./img/regalos/"+img.getNombre()+" \"></div>");
+	out.println("<div class=\"row\"><h4 style=\"color:#2ad2c9\">Para: "+img.getPara()+"</h4></div>");
+	
+}%>
+							
+							</div>
 							</div>
 
 						</div>
 
-					
-		<div class="actions">
-		<br>
-			<h4 id="help" style="color:#2ad2c9"></h4>
-			
-        <a href="#" class="dislike"><i></i></a>
-        
-        <a href="#" class="like"><i></i></a>
-    	</div>
-    	</div>
+					</div>
+
 				</div>
 		
 			

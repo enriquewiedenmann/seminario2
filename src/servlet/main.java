@@ -86,7 +86,7 @@ public class main extends HttpServlet {
 
 					session.setAttribute("userApodo", us.getApodo());
 					session.setAttribute("userId", us.getEmail());
-
+					resp.put("tutorial", true);
 					resp.put("Error", false);
 
 				} else {
@@ -102,6 +102,7 @@ public class main extends HttpServlet {
 
 					session.setAttribute("userApodo", us.getApodo());
 					session.setAttribute("userId", us.getId());
+					resp.put("tutorial", false);
 					resp.put("Error", false);
 
 				} else {
@@ -130,6 +131,7 @@ public class main extends HttpServlet {
 
 					arr.put(jo);
 				}
+				resp.put("mail",email);
 				resp.put("Imagenes", arr);
 
 			} else if ((request.getParameter("action") != null) && request.getParameter("action").equals("like")) {
@@ -145,15 +147,28 @@ public class main extends HttpServlet {
 				Integer idUs = (Integer) session.getAttribute("userId");
 				String agasajado= request.getParameter("agasajado");
 				AdminsitradorImagen.getInstancia().reservarRegalo(idImagen, idUs, agasajado);
+				resp.put("action", "reservar");
 				session.setAttribute("regalos", AdminsitradorImagen.getInstancia().getImagenesReserva(idUs));
-				response.sendRedirect("/listaRegalos.jsp");
+				
+			//	response.sendRedirect("/listaRegalos.jsp");
 				
 				
 				
 				
 						
 						
-			} else {
+			} else if((request.getParameter("action") != null) && request.getParameter("action").equals("paraRegalar")){
+				Integer idUs = (Integer) session.getAttribute("userId");
+				session.setAttribute("regalos", AdminsitradorImagen.getInstancia().getImagenesReserva(idUs));
+
+				
+			}else if((request.getParameter("action") != null) && request.getParameter("action").equals("misCosas")){
+				Integer idUs = (Integer) session.getAttribute("userId");
+				
+				session.setAttribute("regalos", AdminsitradorImagen.getInstancia().getImagenesLike(idUs));
+
+				
+			}else{
 				session.invalidate();
 				resp.put("Error", true);
 			}

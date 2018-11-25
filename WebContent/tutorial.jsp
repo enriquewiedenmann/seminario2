@@ -193,24 +193,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- banner -->
 				<div class="details-grid">
 					<div class="details-shade">
-						<div class="details-right">
-						<img src="img/gift-flat.png" alt=" " onClick="alLike()">
-							
-							<h3>Welcome To</h3>
-							<h4>Regalapp</h4>
+						
+						<video  controls>
+ 							<source src="./tutorial/tutorial.mp4" type="video/mp4">
+ 							 Your browser does not support HTML5 video.
+						</video>
 
-						</div>
-						<div class="banner_search">
-							<form action="#" method="post">
-								<input id="search" type="search" name="search" value="Buscar un amig@ para regalar"
-									onfocus="this.value = '';"
-									onblur="if (this.value == '') {this.value = 'Buscar un amig@ para regalar';}"
-									required="">
-									<ul id="suggestions"  class="rounded-list" data-role="listview" data-inset="true"></ul>
-									
-							</form>
-						</div>
-	&nbsp;
+						<p>
+						
+						<a href="./main.jsp">SALTAR</a>.
+						</p>
+						
+						
+&nbsp;
 &nbsp;&nbsp;
 					</div>
 				
